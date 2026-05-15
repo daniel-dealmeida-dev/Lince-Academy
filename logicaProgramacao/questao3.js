@@ -20,8 +20,7 @@ let numero2 = Number(
     await consoleInterface.question('Digite o segundo número:\n ')
 )
 
-// Fecha a interface do terminal
-consoleInterface.close()
+
 
 // Função que calcula a subtração entre dois números e retorna o valor absoluto
 function calcularSubtracao(numero1, numero2) {
@@ -41,3 +40,6 @@ function calcularSubtracao(numero1, numero2) {
 const resultadoFinal = calcularSubtracao(numero1, numero2)
 
 console.log(`O resultado da subtração é: ${resultadoFinal}`)
+
+// Fecha a interface do terminal
+consoleInterface.close()

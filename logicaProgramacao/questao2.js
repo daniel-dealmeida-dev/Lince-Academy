@@ -23,9 +23,6 @@ while (numeros.length < 5) {
     numeros.push(numero)
 }
 
-// Fecha a interface
-consoleInterface.close()
-
 // Retorna apenas números ímpares
 function verificarImpares(numeros) {
 
@@ -40,3 +37,6 @@ function verificarImpares(numeros) {
 console.log(
     `Os números ímpares são: ${verificarImpares(numeros)}`
 )
+
+// Fecha a interface
+consoleInterface.close()

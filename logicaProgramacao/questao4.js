@@ -20,9 +20,6 @@ const numero2 = Number(
     await consoleInterface.question("Digite o segundo número:\n ")
 )
 
-// Fecha a interface do terminal
-consoleInterface.close()
-
 // Calcula o MMC entre dois números
 function minimoMultiplo(numero1, numero2){
 
@@ -47,3 +44,6 @@ function minimoMultiplo(numero1, numero2){
 
 // Executa a função
 minimoMultiplo(numero1, numero2)
+    
+// Fecha a interface do terminal
+consoleInterface.close()
