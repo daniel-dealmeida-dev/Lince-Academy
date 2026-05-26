@@ -2,21 +2,20 @@ import 'dart:math';
 
 void main() {
   final List<int> lista = [];
-  // 1. Mudamos para int puro, já que não vamos aceitar nulos aqui dentro
-  final List<int> listaPar = []; 
-  int numeroAleatorio;
-  
-  do {
-    numeroAleatorio = Random().nextInt(15);
-    lista.add(numeroAleatorio);
+  final random = Random();
 
-    // 2. Só adiciona na listaPar se o número atual for par
-    if (numeroAleatorio % 2 == 0) {
-      listaPar.add(numeroAleatorio);
-    }
+  // Inicializei a lista com 50 números aleatórios entre 0 e 15
+  for (int i = 0; i < 50; i++) {
+    lista.add(random.nextInt(16)); // nextInt(16) gera de 0 a 15
+  }
 
-  } while (lista.length < 50);
+  // Imprime a lista original formatada com .join()
+  print('Lista original: ${lista.join(' ; ')}\n');
 
-  print('Lista original (Tam: ${lista.length}): $lista\n');
-  print('Lista de Pares (Tam: ${listaPar.length}): $listaPar\n');
+  // removeWhere passa limpando todos os pares
+  // remova o número ONDE o número resto 2 for igual a zero
+  lista.removeWhere((numero) => numero % 2 == 0);
+
+  // Imprime a lista atualizada 
+  print('Lista atualizada: ${lista.join(' ; ')}');
 }
