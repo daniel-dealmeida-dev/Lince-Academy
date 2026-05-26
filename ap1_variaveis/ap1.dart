@@ -1,11 +1,11 @@
 
 void main(){
   // Declaração dos dados
-  String nome = "Daniel";
-  String sobrenome = "de Almeida";
-  int idade = 18;
-  bool ativo = true;
-  double peso = 82.4;
+  final String nome = "Daniel";
+  final String sobrenome = "de Almeida";
+  final int idade = 18;
+  final bool ativo = true;
+  final double peso = 82.4;
 
   // Verificação das variaveis usando ternário 
   String? nacionalidade = null;
