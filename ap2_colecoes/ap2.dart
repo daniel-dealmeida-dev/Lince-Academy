@@ -1,9 +1,9 @@
 import 'dart:math';
 
 void main() {
-  List<int> lista = [];
+  final List<int> lista = [];
   // 1. Mudamos para int puro, já que não vamos aceitar nulos aqui dentro
-  List<int> listaPar = []; 
+  final List<int> listaPar = []; 
   int numeroAleatorio;
   
   do {

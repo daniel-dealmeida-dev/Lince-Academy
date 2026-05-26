@@ -1,7 +1,7 @@
 import 'dart:math';
 
 void main(){
-  List<int> lista = [];
+  final List<int> lista = [];
   int numeroAleatorio;
   
   do {
