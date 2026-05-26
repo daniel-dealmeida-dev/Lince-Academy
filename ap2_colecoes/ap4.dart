@@ -32,9 +32,8 @@ void main() {
   print('Estados: ${estados.join(' ; ')}\n');
 
 
-  // ==========================================
   // segunda coisa que preciso fazer é printar as cidades de SC em ordem alfabética
-  // ==========================================
+ 
   final List<String> cidadesSC = [];
 
   // Varremos o mapa pegando chave (cidade) e valor (estado)
