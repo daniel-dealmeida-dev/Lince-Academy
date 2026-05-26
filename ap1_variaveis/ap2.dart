@@ -7,6 +7,6 @@ void main() {
   // final para valores que são definidos apenas uma vez, mas que podem ser calculados em tempo de execução. O valor é atribuído na primeira vez que é acessado.
   final media = (numero1 + numero2 + numero3 + numero4) / 4;
 
-  // Novamente usei o método toStringAsFixed() para limitar o número de casas decimais a 1, e também usei a interpolação de string para mostrar os números e a média formatados.
+  //  E novamente usei o método toStringAsFixed() para limitar o número de casas decimais a 1, e também usei a interpolação de string para mostrar os números e a média formatados.
   print("A media entre [ ${numero1.toStringAsFixed(1)} , ${numero2.toStringAsFixed(1)} , ${numero3.toStringAsFixed(1)} , ${numero4.toStringAsFixed(1)} ] = ${media.toStringAsFixed(1)}");
 }
