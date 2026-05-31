@@ -22,8 +22,6 @@ void main() {
   imprimirLista(listaResultado);
 }
 
-// --- FUNÇÕES ---
-
 // Criei essa função para não ter que ficar repetindo o print com join toda hora
 void imprimirLista(List<int> lista) {
   // Bônus Se a lista vier vazia por causa do erro de tamanho, ela barra aqui
