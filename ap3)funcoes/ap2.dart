@@ -28,7 +28,9 @@ int funcaoA(int Function(int) funcaoParametro) {
   int execucao2 = funcaoParametro(num2);
 
   // Só para eu conseguir ver no console o que está acontecendo por debaixo dos panos
-  print('Função A executou com os números aleatórios ($num1) e ($num2). Resultados: $execucao1 e $execucao2');
+  print(
+    'Função A executou com os números aleatórios ($num1) e ($num2). Resultados: $execucao1 e $execucao2',
+  );
 
   // Retorna a soma dos dois resultados gerados pela função que veio por parâmetro
   return execucao1 + execucao2;

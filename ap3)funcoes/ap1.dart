@@ -38,7 +38,7 @@ void imprimirLista(List<int> lista) {
 List<int> somarListas(List<int> l1, List<int> l2) {
   // Bônus Validação: se os tamanhos forem diferentes, quebra a regra e já devolve uma lista vazia
   if (l1.length != l2.length) {
-    return []; 
+    return [];
   }
 
   List<int> resultado = [];
