@@ -8,15 +8,15 @@ Este documento reúne a exploração teórica e conceitual sobre estruturas de c
 
 ## Qual a diferença entre usar `if`, `else if` e `else`?
 
-* **`if`**: É o ponto de entrada da validação. Avalia uma expressão booleana. Se for verdadeira, o bloco correspondente é executado e todo o resto da estrutura encadeada é ignorado.
-* **`else if`**: Cria condições alternativas e excludentes. Só é avaliado se o `if` (e todos os `else if` anteriores) falhar (for `false`).
-* **`else`**: É o comportamento padrão (*fallback*). Não possui condição própria; seu bloco é executado obrigatoriamente se todas as verificações anteriores falharem.
+- **`if`**: É o ponto de entrada da validação. Avalia uma expressão booleana. Se for verdadeira, o bloco correspondente é executado e todo o resto da estrutura encadeada é ignorado.
+- **`else if`**: Cria condições alternativas e excludentes. Só é avaliado se o `if` (e todos os `else if` anteriores) falhar (for `false`).
+- **`else`**: É o comportamento padrão (_fallback_). Não possui condição própria; seu bloco é executado obrigatoriamente se todas as verificações anteriores falharem.
 
 ---
 
 ## Quais cuidados tenho que ter com `if` e `else`?
 
-### 1. Avaliação de Curto-Circuito (*Short-Circuit*)
+### 1. Avaliação de Curto-Circuito (_Short-Circuit_)
 
 Em expressões com `&&` (AND), se a primeira condição for falsa, o Dart nem avalia a segunda.
 
@@ -24,7 +24,7 @@ Com `||` (OR), se a primeira for verdadeira, a segunda é ignorada.
 
 Cuidado se a segunda condição depender de uma função que modifica estados.
 
-### 2. Aninhamento Excessivo (*Arrow Anti-Pattern*)
+### 2. Aninhamento Excessivo (_Arrow Anti-Pattern_)
 
 Colocar vários `if` dentro de `if` torna o código ilegível.
 
@@ -83,21 +83,21 @@ void processarPagamentoLimpo(double valor, bool loginAtivo) {
 
 Use o `switch` quando você estiver comparando uma única variável contra múltiplos valores constantes discretos, como:
 
-* `String`
-* `int`
-* `enum`
+- `String`
+- `int`
+- `enum`
 
-O `switch` é semanticamente mais limpo e, em nível de compilação, o Dart pode otimizar tabelas de salto (*jump tables*), tornando a seleção do caso mais eficiente do que múltiplos `if else` sequenciais.
+O `switch` é semanticamente mais limpo e, em nível de compilação, o Dart pode otimizar tabelas de salto (_jump tables_), tornando a seleção do caso mais eficiente do que múltiplos `if else` sequenciais.
 
 ---
 
 ## Qual a importância da palavra-chave `break` em um `switch case`?
 
-No Dart clássico, o `break` evitava o comportamento de *fall-through*, onde a execução continuava para o próximo `case`.
+No Dart clássico, o `break` evitava o comportamento de _fall-through_, onde a execução continuava para o próximo `case`.
 
 ### Nota sobre Dart moderno
 
-A partir do Dart 3, o comportamento padrão impede *fall-through* automaticamente.
+A partir do Dart 3, o comportamento padrão impede _fall-through_ automaticamente.
 
 Mesmo assim, `break` continua útil quando você deseja interromper a execução antes do final do bloco.
 
@@ -141,9 +141,9 @@ Fornece controle total sobre o índice.
 
 Permite:
 
-* Andar para frente ou para trás
-* Pular posições
-* Modificar o índice manualmente
+- Andar para frente ou para trás
+- Pular posições
+- Modificar o índice manualmente
 
 ### `for...in`
 
@@ -157,9 +157,9 @@ Internamente utiliza o padrão **Iterator**, percorrendo a coleção automaticam
 
 Vantagens:
 
-* Código mais legível
-* Menos risco de erros
-* Evita acesso fora dos limites da coleção
+- Código mais legível
+- Menos risco de erros
+- Evita acesso fora dos limites da coleção
 
 ---
 
@@ -183,9 +183,9 @@ Quando você conhece antecipadamente a quantidade de repetições.
 
 Exemplos:
 
-* Percorrer uma lista
-* Executar algo 10 vezes
-* Processar posições de um vetor
+- Percorrer uma lista
+- Executar algo 10 vezes
+- Processar posições de um vetor
 
 ### Use `while`
 
@@ -193,9 +193,9 @@ Quando o número de repetições depende de uma condição dinâmica.
 
 Exemplos:
 
-* Ler dados de rede
-* Processar eventos
-* Aguardar entrada do usuário
+- Ler dados de rede
+- Processar eventos
+- Aguardar entrada do usuário
 
 ---
 
@@ -205,10 +205,10 @@ O principal risco é criar um **loop infinito**.
 
 Consequências:
 
-* Consumo excessivo de CPU
-* Travamento da aplicação
-* Congelamento da interface gráfica
-* Possível estouro de memória
+- Consumo excessivo de CPU
+- Travamento da aplicação
+- Congelamento da interface gráfica
+- Possível estouro de memória
 
 Exemplo:
 
