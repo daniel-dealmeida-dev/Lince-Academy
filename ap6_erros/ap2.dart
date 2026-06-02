@@ -27,7 +27,6 @@ void main(List<String> args) {
     print('Por favor, passe um número. Exemplo: dart ap2.dart 4');
     return;
   }
-
   // Pega o valor digitado no terminal e manda para a função
   validarNumeroPar(args[0]);
 }
