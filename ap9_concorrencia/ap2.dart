@@ -1,5 +1,3 @@
-import 'dart:async';
-
 Future<void> main() async {
   List<String> urls = [
     'https://example.com/imagem1.jpg',

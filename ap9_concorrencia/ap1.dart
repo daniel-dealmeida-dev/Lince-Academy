@@ -1,5 +1,3 @@
-import 'dart:async';
-
 Future<String> consultarAPI(String codigoRastreamento) async {
   await Future.delayed(Duration(seconds: 2));
 
