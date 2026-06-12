@@ -2,7 +2,6 @@ import 'dart:math';
 
 void main() {
   final controleDePessoas = ControleDePessoas();
-
   // Cadastrando pessoas no sistema
   controleDePessoas
     ..cadastrarPessoa(Pessoa('Jose', Mes.abril))
