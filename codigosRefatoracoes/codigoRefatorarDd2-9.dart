@@ -1,5 +1,3 @@
-import 'dart:math';
-
 void main() {
   final controleDePessoas = ControleDePessoas();
 
@@ -56,39 +54,30 @@ class Pessoa {
 }
 
 class ControleDePessoas {
-  final _pessoasPorMes = <Mes, List<Pessoa>>{};
+  final _pessoas = <Pessoa>[];
 
-  // Método de cadastro usando atribuição condicional de nulo (??=)
-  void cadastrarPessoa(Pessoa pessoa) {
-    final mesDaPessoa = pessoa.mesDeNascimento;
+  /// Cadastra uma pessoa no sistema
+  void cadastrarPessoa(Pessoa pessoa) => _pessoas.add(pessoa);
 
-    _pessoasPorMes[mesDaPessoa] ??= <Pessoa>[];
-
-    // Adiciona a pessoa na lista
-    _pessoasPorMes[mesDaPessoa]!.add(pessoa);
-  }
-
-  // Pega apenas os meses que possuem pessoas
+  /// Retorna a lista de meses com pessoas cadastradas
   List<Mes> get mesesComPessoas {
-    final listaDeMeses = _pessoasPorMes.keys.toList();
-    
-    listaDeMeses.sort((mesA, mesB) {
-      if (mesA.index < mesB.index) {
-        return -1;
+    final meses = <Mes>{};
+    for (final pessoa in _pessoas) {
+      if (!meses.contains(pessoa.mesDeNascimento)) {
+        meses.add(pessoa.mesDeNascimento);
       }
-      
-      if (mesA.index > mesB.index) {
-        return 1;
-      }
-      
-      // Se forem iguais, retorna 0 (não muda eles de lugar)
-      return 0;
-    });
-    
-    return listaDeMeses;
+    }
+    return meses.toList()..sort((a, b) => a.index.compareTo(b.index));
   }
 
+  /// Retorna a lista de pessoas que nasceram no [mes] especificado
   List<Pessoa> pessoasPorMes(Mes mes) {
-    return _pessoasPorMes[mes] ?? <Pessoa>[];
+    final pessoas = <Pessoa>[];
+    for (final pessoa in _pessoas) {
+      if (pessoa.mesDeNascimento == mes) {
+        pessoas.add(pessoa);
+      }
+    }
+    return pessoas;
   }
 }
