@@ -1,0 +1,21 @@
+{
+  "roots": [
+    "atividade_final_dart"
+  ],
+  "packages": [
+    {
+      "name": "atividade_final_dart",
+      "version": "1.0.0",
+      "dependencies": [
+        "yaansi"
+      ],
+      "devDependencies": []
+    },
+    {
+      "name": "yaansi",
+      "version": "1.2.0",
+      "dependencies": []
+    }
+  ],
+  "configVersion": 1
+}
