@@ -54,3 +54,34 @@ class MetricasMensais {
     return direcaoMaisFrequente;
   }
 }
+
+class ProcessadorEstatistico {
+
+  final Map<String, Map<int, Map<int, MetricasMensais>>> _dados = {};
+
+  void registrarDadosNoMes({
+    required String uf,
+    required int ano,
+    required int mes,
+    required double temp,
+    required double vento,
+  }){
+    _dados.putIfAbsent(uf, ()=>{});
+    final mapaDoEstado = _dados[uf]!;
+
+    mapaDoEstado.putIfAbsent(ano, ()=>{});
+    final mapaDoAno = mapaDoEstado[ano]!;
+
+
+    mapaDoAno.putIfAbsent(mes, ()=> MetricasMensais());
+    final metricasDoMes = mapaDoAno[mes]!;
+
+    metricasDoMes.registrarLeitura(temp,  vento);
+    }
+
+    //TODO - terminar implementação do metodo estatistico
+    MetricasMensais? obterMetricas(String uf, int ano, int mes){
+
+    }
+
+}

@@ -2,12 +2,14 @@ class RegistroClimatico {
   final String uf;
   final DateTime dataHora;
   final double temperatura;
+  final double umidade;
   final double velocidadeVento;
   final double direcaoVento;
 
   RegistroClimatico({
     required this.uf,
     required this.dataHora,
+    required this.umidade,
     required this.temperatura,
     required this.velocidadeVento,
     required this.direcaoVento,
@@ -29,6 +31,7 @@ class RegistroClimatico {
     return RegistroClimatico(
       uf: uf,
       dataHora: DateTime(ano, mes, dia, hora),
+      umidade: double.parse(colunas[4].trim()),
       temperatura: double.parse(colunas[3].trim()),
       velocidadeVento: double.parse(colunas[6].trim()),
       direcaoVento: double.parse(colunas[7].trim()),
