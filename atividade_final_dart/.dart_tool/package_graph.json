@@ -7,6 +7,7 @@
       "name": "atividade_final_dart",
       "version": "1.0.0",
       "dependencies": [
+        "path",
         "yaansi"
       ],
       "devDependencies": []
@@ -14,6 +15,11 @@
     {
       "name": "yaansi",
       "version": "1.2.0",
+      "dependencies": []
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
       "dependencies": []
     }
   ],
