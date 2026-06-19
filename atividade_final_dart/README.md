@@ -41,7 +41,7 @@ Este projeto consiste em uma aplicação de linha de comando (CLI) desenvolvida 
 │       └── relatorio_view.dart
 ├── pubspec.yaml            # Gerenciamento de dependências
 └── README.md
-
+```
  ## Jornada de Desenvolvimento
 O maior desafio deste projeto foi lidar com a heterogeneidade dos dados de entrada. Implementei um mapeador dinâmico de cabeçalhos, tornando o sistema capaz de identificar colunas automaticamente, o que evita erros humanos caso o formato do CSV mude levemente.
 
