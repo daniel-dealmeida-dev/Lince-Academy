@@ -15,26 +15,40 @@ class RegistroClimatico {
     required this.direcaoVento,
   });
 
-  // Esse método recebe a linha bruta, limpa, converte e devolve o objeto pronto
-  factory RegistroClimatico.fromCsv({
-    required String linhaCsv,
+  /// factory para conversão de linha CSV em objeto de domínio.
+  /// Realiza o tratamento de strings e extração de valores baseados no mapa de índices.
+  factory RegistroClimatico.fromDinamico({
+    required List<String> colunas,
+    required Map<String, int> indices,
     required String uf,
     required int ano,
   }) {
-    final colunas = linhaCsv.split(',');
+    // função utilitária para normalização e conversão de dados numéricos
+    double parse(int i) {
+      if (i < 0 || i >= colunas.length) return 0.0;
 
-    // Faz as conversões aqui dentro de forma isolada
-    int mes = int.parse(colunas[0].trim());
-    int dia = int.parse(colunas[1].trim());
-    int hora = int.parse(colunas[2].trim());
+      // Limpeza de caracteres não numéricos e padronização do separador decimal
+      final txt = colunas[i]
+          .trim()
+          .toLowerCase()
+          .replaceAll(',', '.')
+          .replaceAll(RegExp(r'[^0-9\.\-]'), '');
+
+      return double.tryParse(txt) ?? 0.0;
+    }
+
+    // extração e conversão de componentes de data e hora
+    int mes = int.parse(colunas[indices['mes']!].trim());
+    int dia = int.parse(colunas[indices['dia']!].trim());
+    int hora = int.parse(colunas[indices['hora']!].trim());
 
     return RegistroClimatico(
       uf: uf,
       dataHora: DateTime(ano, mes, dia, hora),
-      umidade: double.parse(colunas[4].trim()),
-      temperatura: double.parse(colunas[3].trim()),
-      velocidadeVento: double.parse(colunas[6].trim()),
-      direcaoVento: double.parse(colunas[7].trim()),
+      temperatura: parse(indices['temperatura'] ?? -1),
+      umidade: parse(indices['umidade'] ?? -1),
+      velocidadeVento: parse(indices['velocidadevento'] ?? -1),
+      direcaoVento: parse(indices['direcaovento'] ?? -1),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:atividade_final_dart/models/registro_climatico.dart';
+import 'package:atividade_final_dart/models/metricas_mensais.dart';
 import 'package:atividade_final_dart/services/processador_estatico.dart';
 import 'package:atividade_final_dart/utils/mensagens.dart';
 import 'package:path/path.dart' as p;
@@ -10,154 +10,103 @@ class MeteorologiaController {
   final ProcessadorEstatistico processador = ProcessadorEstatistico();
 
   Future<void> carregarDados() async {
-    final inicio = DateTime.now();
-
-    int arquivosProcessados = 0;
-    int arquivosIgnorados = 0;
-    int registrosLidos = 0;
-    int registrosInvalidos = 0;
-
     final pasta = Directory(r'C:\clima\sensores');
 
-    try {
-      if (!await pasta.exists()) {
-        Mensagem.erro(
-          r'A pasta C:\clima\sensores não foi encontrada.',
-        );
-        return;
-      }
-    } catch (error) {
-      Mensagem.erro(
-        'Falha ao acessar a pasta: $error',
-      );
+    if (!await pasta.exists()) {
+      Mensagem.erro('Pasta não encontrada.');
       return;
     }
 
+    // Processamento sequencial de arquivos .csv na pasta informada
     await for (final arquivo in pasta.list()) {
-      if (arquivo is! File ||
-          !arquivo.path.toLowerCase().endsWith('.csv')) {
-        continue;
-      }
+      if (arquivo is! File || !arquivo.path.endsWith('.csv')) continue;
 
-      final nomeArquivo = p.basename(arquivo.path);
+      final nome = p.basename(arquivo.path);
 
       try {
-        final partesNome =
-            nomeArquivo.replaceAll('.csv', '').split('_');
+        // Extração de metadados (UF e ano) a partir da nomenclatura do arquivo
+        final partes = nome.replaceAll('.csv', '').split('_');
+        final uf = partes[0].toUpperCase();
+        final ano = int.parse(partes[1]);
 
-        if (partesNome.length < 2) {
-          Mensagem.alerta(
-            'Arquivo "$nomeArquivo" ignorado: nome fora do padrão.',
-          );
-          arquivosIgnorados++;
-          continue;
-        }
+        Mensagem.info('Processando $nome');
 
-        final uf = partesNome[0].toUpperCase();
-        final ano = int.tryParse(partesNome[1].trim());
-
-        if (ano == null) {
-          Mensagem.alerta(
-            'Arquivo "$nomeArquivo" ignorado: ano inválido.',
-          );
-          arquivosIgnorados++;
-          continue;
-        }
-
-        arquivosProcessados++;
-
-        Mensagem.info(
-          'Processando arquivo $nomeArquivo',
-        );
-
-        final streamLinhas = arquivo
+        // Configuração de decodificação para suporte a caracteres especiais
+        final linhas = arquivo
             .openRead()
-            .transform(utf8.decoder)
+            .transform(latin1.decoder)
             .transform(const LineSplitter());
 
-        int numeroLinha = 0;
+        Map<String, int>? idx;
 
-        await for (final linha in streamLinhas) {
-          numeroLinha++;
+        await for (final line in linhas) {
+          if (line.trim().isEmpty) continue;
 
-          if (linha.trim().isEmpty ||
-              linha.startsWith('Mês')) {
+          final cols = line.split(',');
+
+          // Definição dos índices das colunas a partir do cabeçalho
+          if (idx == null) {
+            idx = _mapearCabecalhoSimples(cols);
             continue;
           }
 
-          registrosLidos++;
-
-          final colunas = inlineSplit(linha); // linha.split(',')
-
-          if (colunas.length < 8) {
-            registrosInvalidos++;
-
-            Mensagem.alerta(
-              'Linha $numeroLinha do arquivo $nomeArquivo ignorada: quantidade de colunas inválida.',
-            );
-
-            continue;
-          }
+          if (idx.isEmpty) continue;
 
           try {
-            final registro = RegistroClimatico.fromCsv(
-              linhaCsv: linha,
+            // Conversão de linha CSV para modelo e registro no processador estatístico
+            final r = RegistroClimatico.fromDinamico(
+              colunas: cols,
+              indices: idx,
               uf: uf,
               ano: ano,
             );
-
+            
             processador.registrarDadosNoMes(
-              uf: registro.uf,
-              ano: registro.dataHora.year,
-              mes: registro.dataHora.month,
-              temp: registro.temperatura,
-              umidade: registro.umidade, 
-              vento: registro.direcaoVento,
+              uf: r.uf,
+              ano: r.dataHora.year,
+              mes: r.dataHora.month,
+              temp: r.temperatura,
+              umidade: r.umidade,
+              velVento: r.velocidadeVento,
+              direcaoVento: r.direcaoVento,
+              hora: r.dataHora.hour,
             );
           } catch (e) {
-            registrosInvalidos++;
-
-            Mensagem.alerta(
-              'Linha $numeroLinha do arquivo $nomeArquivo ignorada por conter dados inválidos.',
-            );
+            print('ERRO NA LINHA DO CSV: $e');
           }
         }
       } catch (e) {
-        Mensagem.erro(
-          'Erro ao processar o arquivo $nomeArquivo: $e',
-        );
+        Mensagem.erro('Erro em $nome: $e');
+      }
+    }
+  }
+
+  // Identificação dinâmica de índices de colunas para maior flexibilidade na leitura
+  Map<String, int> _mapearCabecalhoSimples(List<String> cols) {
+    final map = <String, int>{};
+
+    for (int i = 0; i < cols.length; i++) {
+      final c = cols[i].toLowerCase().trim();
+
+      if (c.contains('mes') || c.contains('mês')) map['mes'] = i;
+      if (c.contains('dia')) map['dia'] = i;
+      if (c.contains('hora')) map['hora'] = i;
+      if (c.contains('temperatura')) map['temperatura'] = i;
+      if (c.contains('umidade')) map['umidade'] = i;
+      if (c.contains('velocidade')) map['velocidadevento'] = i;
+      if (c.contains('direção') || c.contains('direcao')) {
+        map['direcaovento'] = i;
       }
     }
 
-    final tempo = DateTime.now().difference(inicio);
-
-    Mensagem.info('''
-=================================
-PROCESSAMENTO CONCLUÍDO
-=================================
-
-Arquivos processados: $arquivosProcessados
-Arquivos ignorados: $arquivosIgnorados
-
-Registros lidos: $registrosLidos
-Registros inválidos: $registrosInvalidos
-
-Tempo de execução: ${tempo.inMilliseconds} ms
-''');
+    return map;
   }
 
-  MetricasMensais? consultarRelatorioMensal(
-    String uf,
-    int ano,
-    int mes,
-  ) {
-    return processador.obterMetricas(
-      uf,
-      ano,
-      mes,
-    );
+  MetricasMensais? consultarRelatorioMensal(String uf, int ano, int mes) {
+    return processador.obterMetricas(uf, ano, mes);
+  }
+
+  MetricasMensais consultarConsolidadoAnual(String uf, int ano) {
+    return processador.calcularConsolidadoAnual(uf, ano);
   }
 }
-
-// Função auxiliar apenas para legibilidade do split interno
-List<String> inlineSplit(String linha) => linha.split(',');

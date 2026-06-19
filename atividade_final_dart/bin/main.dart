@@ -1,7 +1,6 @@
-import 'package:atividade_final_dart/utils/mensagens.dart';
+import 'package:atividade_final_dart/views/relatorio_view.dart';
 
-void main(){
-Mensagem.info('Arquivo carregado.');
-Mensagem.alerta('Linha inválida ignorada.');
-Mensagem.erro('Falha ao abrir arquivo.');
+Future<void> main() async {
+  final view = MeteorologiaView();
+  await view.iniciar();
 }
