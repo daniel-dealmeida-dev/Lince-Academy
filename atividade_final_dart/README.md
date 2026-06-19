@@ -43,7 +43,7 @@ Este projeto consiste em uma aplicação de linha de comando (CLI) desenvolvida 
 └── README.md
 ```
  ## Jornada de Desenvolvimento
-O maior desafio deste projeto foi lidar com a heterogeneidade dos dados de entrada. Implementei um mapeador dinâmico de cabeçalhos, tornando o sistema capaz de identificar colunas automaticamente, o que evita erros humanos caso o formato do CSV mude levemente.
+O maior desafio deste projeto foi lidar com a variedade dos dados de entrada. Implementei um mapeador dinâmico de cabeçalhos, tornando o sistema capaz de identificar colunas automaticamente, o que evita erros humanos caso o formato do CSV mude levemente.
 
 Além disso, a escolha por StringBuffer na construção dos relatórios foi para evitar a alocação excessiva de memória durante a concatenação de strings(pensando em um futuro escalonamento), mantendo o consumo de recursos otimizado mesmo com relatórios mais extensos. A organização em camadas (Model-View-Controller) para que, ao evoluir a aplicação (como adicionar uma nova métrica), eu pudesse alterar apenas o Model correspondente, sem impacto na interface ou no Controller.
 
