@@ -2,12 +2,16 @@ import 'dart:math';
 
 class Helpers {
   //conversões
-  static double celciusParaFahrenheit(double c) => (c * 9 / 5) +32;
+  static double celciusParaFahrenheit(double c) => (c * 9 / 5) + 32;
   static double celciusParaKelvin(double c) => c + 273.15;
-  static double grausParaRadianos(double g) => g * pi / 100;
+  static double grausParaRadianos(double g) => g * pi / 180;
 
+
+  static double msParaKmh(double ms) => ms * 3.6;
+  static double msParaMph(double ms) => ms * 2.23694;
+  
   //formatações de datas
-  static String obterNomemes(int mes){
+  static String obterNomemes(int mes) {
     const meses = {
       1: 'Janeiro',
       2: 'Fevereiro',
@@ -26,8 +30,7 @@ class Helpers {
   }
 
   //funcção com um regex pra salvar um TXT
-  static String removerCodigoAnsi(String texto){
+  static String removerCodigoAnsi(String texto) {
     return texto.replaceAll(RegExp(r'\x1B\[[0-9;]*m'), '');
   }
-
 }
