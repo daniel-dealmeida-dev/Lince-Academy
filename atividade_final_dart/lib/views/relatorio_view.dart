@@ -4,7 +4,7 @@ import 'package:atividade_final_dart/models/metricas_mensais.dart';
 import 'package:atividade_final_dart/utils/helpers.dart';
 import 'package:atividade_final_dart/utils/mensagens.dart';
 
-/// Classe responsável pela interação com o usuário via terminal e exibição dos relatórios.
+// Classe responsável pela interação com o usuário via terminal e exibição dos relatórios.
 class MeteorologiaView {
   final MeteorologiaController _controller = MeteorologiaController();
 
@@ -48,7 +48,7 @@ class MeteorologiaView {
     }
   }
 
-  /// Processa e exibe as métricas estatísticas de temperatura.
+  // Processa e exibe as métricas estatísticas de temperatura.
   void _gerarRelatorioTemperatura() {
     final buffer = StringBuffer();
     buffer.writeln('\n-- RELATÓRIO DE TEMPERATURA --');
@@ -92,7 +92,7 @@ class MeteorologiaView {
     _verificarSalvarArquivo(buffer.toString(), 'CLIMA');
   }
 
-  /// Processa e exibe as métricas estatísticas de umidade.
+  // Processa e exibe as métricas estatísticas de umidade.
   void _gerarRelatorioUmidade() {
     final buffer = StringBuffer();
     buffer.writeln('\n-- RELATÓRIO DE UMIDADE --');
@@ -128,7 +128,7 @@ class MeteorologiaView {
     _verificarSalvarArquivo(buffer.toString(), 'UMIDADE');
   }
 
-  /// Processa e exibe as métricas de direção de vento (moda estatística).
+  // Processa e exibe as métricas de direção de vento (moda estatística).
   void _gerarRelatorioVento() {
     final buffer = StringBuffer();
     buffer.writeln('\n-- RELATÓRIO DE DIREÇÃO DO VENTO --');
@@ -161,7 +161,7 @@ class MeteorologiaView {
     _verificarSalvarArquivo(buffer.toString(), 'VENTO');
   }
 
-  /// Realiza a exportação do conteúdo do buffer para arquivo de texto, removendo códigos ANSI.
+  // Realiza a exportação do conteúdo do buffer para arquivo de texto, removendo códigos ANSI.
   void _verificarSalvarArquivo(String textoRelatorio, String prefixoArquivo) {
     stdout.write('\nDESEJA SALVAR ESTE RELATÓRIO EM ARQUIVO TXT? (S/N): ');
     final resposta = stdin.readLineSync()?.trim().toUpperCase() ?? '';
