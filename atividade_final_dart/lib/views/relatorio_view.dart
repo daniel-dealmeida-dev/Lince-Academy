@@ -128,7 +128,7 @@ class MeteorologiaView {
     _verificarSalvarArquivo(buffer.toString(), 'UMIDADE');
   }
 
-  /// Processa e exibe as métricas de direção de vento (moda estatística).
+  /// Processa e exibe as métricas de direção de vento (moda).
   void _gerarRelatorioVento() {
     final buffer = StringBuffer();
     buffer.writeln('\n-- RELATÓRIO DE DIREÇÃO DO VENTO --');
