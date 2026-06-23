@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main(){
+void main() {
   runApp(const MaterialApp(home: MyApp()));
 }
 
@@ -15,41 +15,40 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Color corAtual = Colors.white;
 
-  void mudarTudo(){
-    setState((){
-
+  void mudarTudo() {
+    setState(() {
       corAtual = Color.fromRGBO(
         Random().nextInt(256),
         Random().nextInt(256),
         Random().nextInt(256),
         1.0,
       );
-  });
-    }
+    });
+  }
 
-  
-  
-  @override
+ @override
 Widget build(BuildContext context) {
   return Scaffold(
-    body: Center(
-      child: Column( // Usei Column para alinhar o texto acima do botão
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
+    body: Stack( // O Stack permite sobrepor elementos
+      children: [ // <- O Flutter exige 'children' aqui, é impossível fugir disso para layouts sobrepostos
+        Align(
+          alignment: Alignment.center,
+          child: Text(
             'Texto com cor sorteada',
-            style: TextStyle(
-              fontSize: 30,
-              color: corAtual, // AQUI está o requisito: mudar a cor do texto
+            style: TextStyle(fontSize: 30, color: corAtual),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 50.0), // Correção aqui!
+            child: ElevatedButton(
+              onPressed: mudarTudo,
+              child: const Text('Sortear cor'),
             ),
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: mudarTudo,
-            child: const Text('Sortear cor'), // O texto do botão também pede o requisito
-          ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

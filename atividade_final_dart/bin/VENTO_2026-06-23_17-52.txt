@@ -1,0 +1,40 @@
+
+-- RELATÓRIO DE DIREÇÃO DO VENTO --
+
+------------------------------
+ESTADO: SP | ANO: 2024
+----------------------------
+   Mês: Janeiro -> Predominante: 30° / 0.52 rad
+   Mês: Fevereiro -> Predominante: 120° / 2.09 rad
+   Mês: Março -> Predominante: 140° / 2.44 rad
+   Mês: Abril -> Predominante: 150° / 2.62 rad
+   Mês: Maio -> Predominante: 120° / 2.09 rad
+   Mês: Junho -> Predominante: 40° / 0.70 rad
+   Mês: Julho -> Predominante: 30° / 0.52 rad
+   Mês: Agosto -> Predominante: 30° / 0.52 rad
+   Mês: Setembro -> Predominante: 180° / 3.14 rad
+   Mês: Outubro -> Predominante: 180° / 3.14 rad
+   Mês: Novembro -> Predominante: 120° / 2.09 rad
+   Mês: Dezembro -> Predominante: 150° / 2.62 rad
+
+   >> CONSOLIDADO ANUAL (SP):
+     Direção de Maior Frequência: 120° / 2.09 rad
+
+------------------------------
+ESTADO: SC | ANO: 2024
+----------------------------
+   Mês: Janeiro -> Predominante: 30° / 0.52 rad
+   Mês: Fevereiro -> Predominante: 210° / 3.67 rad
+   Mês: Março -> Predominante: 30° / 0.52 rad
+   Mês: Abril -> Predominante: 360° / 6.28 rad
+   Mês: Maio -> Predominante: 30° / 0.52 rad
+   Mês: Junho -> Predominante: 360° / 6.28 rad
+   Mês: Julho -> Predominante: 360° / 6.28 rad
+   Mês: Agosto -> Predominante: 360° / 6.28 rad
+   Mês: Setembro -> Predominante: 360° / 6.28 rad
+   Mês: Outubro -> Predominante: 30° / 0.52 rad
+   Mês: Novembro -> Predominante: 30° / 0.52 rad
+   Mês: Dezembro -> Predominante: 30° / 0.52 rad
+
+   >> CONSOLIDADO ANUAL (SC):
+     Direção de Maior Frequência: 30° / 0.52 rad
